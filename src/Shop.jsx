@@ -1,5 +1,7 @@
+import Products from "./Products";
+
 function Shop() {
-  return <div></div>;
+  return <Products />;
 }
 
 export default Shop;

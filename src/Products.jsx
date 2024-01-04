@@ -6,7 +6,7 @@ function Products() {
 
   useEffect(function () {
     async function fetchProducts() {
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch("https://fakestoreapi.com/products/");
       const data = await res.json();
       setProducts(data);
     }
@@ -14,10 +14,12 @@ function Products() {
   }, []);
 
   return (
-    <div>
-      {products.map((product) => (
-        <ProductItem product={product} key={product.id}></ProductItem>
-      ))}
+    <div className="">
+      <div className="flex flex-wrap mx-auto">
+        {products.map((product) => (
+          <ProductItem product={product} key={product.id}></ProductItem>
+        ))}
+      </div>
     </div>
   );
 }
