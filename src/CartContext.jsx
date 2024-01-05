@@ -4,6 +4,7 @@ const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [quantity, setQuantity] = useState(0);
 
   const handleAddToCart = (product) => {
     console.log("Adding to cart:", product);
@@ -13,8 +14,37 @@ function CartProvider({ children }) {
     });
   };
 
+  const incrementQuantity = () => {
+    setQuantity((q) => q + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity((q) => q - 1);
+  };
+
+  const deleteItem = (product) => {
+    setCart((prevProducts) =>
+      prevProducts.filter((item) => item.id !== product.id)
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, handleAddToCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        handleAddToCart,
+        incrementQuantity,
+        decrementQuantity,
+        quantity,
+        setQuantity,
+        clearCart,
+        deleteItem,
+      }}
+    >
       {children}{" "}
     </CartContext.Provider>
   );

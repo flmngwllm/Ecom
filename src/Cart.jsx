@@ -1,7 +1,8 @@
 import { useCart } from "./cartContext";
+import UpdateItemQuantity from "./updateItemQuantity";
 
 function Cart() {
-  const { cart } = useCart();
+  const { cart, deleteItem } = useCart();
   return (
     <div>
       <ul>
@@ -10,6 +11,8 @@ function Cart() {
             <img src={item.image} />
             {item.title}
             {item.price}
+            <UpdateItemQuantity />
+            <button onClick={() => deleteItem(item)}>Remove Product</button>
           </li>
         ))}
       </ul>

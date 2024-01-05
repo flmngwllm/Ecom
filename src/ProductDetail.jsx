@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useCart } from "./cartContext";
 
 function ProductDetail() {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
+  const { handleAddToCart } = useCart();
 
   useEffect(() => {
     async function fetchProductDetails() {
@@ -25,7 +27,7 @@ function ProductDetail() {
       {product.price}
       {product.description}
       {product.category}
-      <button>Add to Cart</button>
+      <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
     </div>
   );
 }
