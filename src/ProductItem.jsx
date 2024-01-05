@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ProductItem({ product }) {
+function ProductItem({ product, AddToCart }) {
   return (
     <>
       <div className="flex items-center max-w-[300px]">
@@ -12,7 +12,7 @@ function ProductItem({ product }) {
           <li>{product.title}</li>{" "}
         </Link>
         <li>{product.price}</li>
-        <button>Add to Cart</button>
+        <button onClick={AddToCart}>Add to Cart</button>
       </div>
     </>
   );

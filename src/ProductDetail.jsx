@@ -16,15 +16,16 @@ function ProductDetail() {
     fetchProductDetails();
   }, [productId]);
 
+  if (!product) <div>Loading...</div>;
+
   return (
     <div>
       <img src={product.image} />
       {product.title}
       {product.price}
       {product.description}
-      {product.rating.rate}
-      {product.rating.count}
       {product.category}
+      <button>Add to Cart</button>
     </div>
   );
 }

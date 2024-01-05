@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
+import { useCart } from "./cartContext";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const { handleAddToCart } = useCart();
 
   useEffect(function () {
     async function fetchProducts() {
@@ -14,13 +16,19 @@ function Products() {
   }, []);
 
   return (
-    <div className="">
-      <div className="flex flex-wrap mx-auto">
-        {products.map((product) => (
-          <ProductItem product={product} key={product.id}></ProductItem>
-        ))}
+    <>
+      <div className="">
+        <div className="flex flex-wrap mx-auto">
+          {products.map((product) => (
+            <ProductItem
+              product={product}
+              key={product.id}
+              AddToCart={() => handleAddToCart(product)}
+            ></ProductItem>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
