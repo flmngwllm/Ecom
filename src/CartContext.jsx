@@ -14,11 +14,11 @@ function CartProvider({ children }) {
     });
   };
 
-  const incrementQuantity = () => {
-    setQuantity((q) => q + 1);
+  const incrementQuantity = (product) => {
+    setQuantity((prevProducts) => prevProducts.find());
   };
 
-  const decrementQuantity = () => {
+  const decrementQuantity = (product) => {
     setQuantity((q) => q - 1);
   };
 
