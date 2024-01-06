@@ -1,8 +1,10 @@
+import UpdateItemQuantities from "./UpdateItemQuantities";
 import { useCart } from "./cartContext";
-import UpdateItemQuantity from "./updateItemQuantity";
 
 function Cart() {
-  const { cart, deleteItem } = useCart();
+  const { cart, deleteItem, clearCart, incrementQuantity, decrementQuantity } =
+    useCart();
+
   return (
     <div>
       <ul>
@@ -11,11 +13,22 @@ function Cart() {
             <img src={item.image} />
             {item.title}
             {item.price}
-            <UpdateItemQuantity />
+            <UpdateItemQuantities
+              productId={item.id}
+              quantity={item.quantity}
+              onQuantityChange={(newQuantity) =>
+                incrementQuantity(item.id, newQuantity)
+              }
+              onDecrement={(newQuantity) =>
+                decrementQuantity(item.id, newQuantity)
+              }
+            />
+
             <button onClick={() => deleteItem(item)}>Remove Product</button>
           </li>
         ))}
       </ul>
+      <button onClick={clearCart}>Clear Cart</button>
     </div>
   );
 }

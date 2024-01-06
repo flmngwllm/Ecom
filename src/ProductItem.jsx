@@ -12,7 +12,11 @@ function ProductItem({ product, AddToCart }) {
           <li>{product.title}</li>{" "}
         </Link>
         <li>{product.price}</li>
-        <button onClick={AddToCart}>Add to Cart</button>
+        <button
+          onClick={() => typeof AddToCart === "function" && AddToCart(product)}
+        >
+          Add to Cart
+        </button>
       </div>
     </>
   );

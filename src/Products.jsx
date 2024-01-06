@@ -8,9 +8,13 @@ function Products() {
 
   useEffect(function () {
     async function fetchProducts() {
-      const res = await fetch("https://fakestoreapi.com/products/");
-      const data = await res.json();
-      setProducts(data);
+      try {
+        const res = await fetch("https://fakestoreapi.com/products/");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     }
     fetchProducts();
   }, []);

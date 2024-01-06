@@ -4,22 +4,36 @@ const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(0);
 
-  const handleAddToCart = (product) => {
-    console.log("Adding to cart:", product);
+  const handleAddToCart = (product, quantity = 1) => {
     setCart((prevProducts) => {
-      console.log("Previous cart:", prevProducts);
-      return [...prevProducts, product];
+      const exProduct = prevProducts.find((item) => item.id === product.id);
+      if (exProduct) {
+        return prevProducts.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        return [...prevProducts, { ...product, quantity }];
+      }
     });
   };
 
-  const incrementQuantity = (product) => {
-    setQuantity((prevProducts) => prevProducts.find());
+  const incrementQuantity = (productId) => {
+    setCart((prevProducts) =>
+      prevProducts.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
   };
 
-  const decrementQuantity = (product) => {
-    setQuantity((q) => q - 1);
+  const decrementQuantity = (productId) => {
+    setCart((prevProducts) =>
+      prevProducts.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+      )
+    );
   };
 
   const deleteItem = (product) => {
@@ -39,8 +53,6 @@ function CartProvider({ children }) {
         handleAddToCart,
         incrementQuantity,
         decrementQuantity,
-        quantity,
-        setQuantity,
         clearCart,
         deleteItem,
       }}
