@@ -1,28 +1,19 @@
-import { useCart } from "./cartContext";
-
-function UpdateItemQuantities({
-  productId,
-  quantity,
-  onQuantityChange,
-  onDecrement,
-}) {
-  const { incrementQuantity, decrementQuantity } = useCart();
-
+function UpdateItemQuantities({ quantity, onIncrement, onDecrement }) {
   const handleIncrement = () => {
-    incrementQuantity(productId);
-    onQuantityChange(quantity + 1);
+    console.log("Incrementing quantity");
+    onIncrement();
   };
 
   const handleDecrement = () => {
-    decrementQuantity(productId);
-    onDecrement(Math.max(quantity - 1, 0));
+    console.log("Decrementing quantity");
+    onDecrement();
   };
 
   return (
     <>
-      <button onClick={handleIncrement}>+</button>
-      <span>{quantity}</span>
       {quantity > 0 && <button onClick={handleDecrement}>-</button>}
+      <span>{quantity}</span>
+      <button onClick={handleIncrement}>+</button>
     </>
   );
 }

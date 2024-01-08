@@ -2,9 +2,15 @@ import UpdateItemQuantities from "./UpdateItemQuantities";
 import { useCart } from "./cartContext";
 
 function Cart() {
-  const { cart, deleteItem, clearCart, incrementQuantity, decrementQuantity } =
-    useCart();
-
+  const {
+    cart,
+    deleteItem,
+    clearCart,
+    incrementQuantity,
+    decrementQuantity,
+    getTotalQuantity,
+    getTotalPrice,
+  } = useCart();
   return (
     <div>
       <ul>
@@ -16,19 +22,28 @@ function Cart() {
             <UpdateItemQuantities
               productId={item.id}
               quantity={item.quantity}
-              onQuantityChange={(newQuantity) =>
-                incrementQuantity(item.id, newQuantity)
-              }
-              onDecrement={(newQuantity) =>
-                decrementQuantity(item.id, newQuantity)
-              }
+              onIncrement={() => incrementQuantity(item.id)}
+              onDecrement={() => decrementQuantity(item.id)}
             />
+
+            {parseFloat((item.totalPrice = item.price * item.quantity)).toFixed(
+              2
+            )}
 
             <button onClick={() => deleteItem(item)}>Remove Product</button>
           </li>
         ))}
       </ul>
-      <button onClick={clearCart}>Clear Cart</button>
+
+      {getTotalQuantity > 0 ? (
+        <button onClick={clearCart}>Clear Cart</button>
+      ) : (
+        "Your cart is empty"
+      )}
+
+      {getTotalQuantity}
+
+      {getTotalPrice > 0 && parseFloat(getTotalPrice).toFixed(2)}
     </div>
   );
 }

@@ -42,6 +42,13 @@ function CartProvider({ children }) {
     );
   };
 
+  const getTotalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const getTotalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   const clearCart = () => {
     setCart([]);
   };
@@ -55,6 +62,8 @@ function CartProvider({ children }) {
         decrementQuantity,
         clearCart,
         deleteItem,
+        getTotalQuantity,
+        getTotalPrice,
       }}
     >
       {children}{" "}

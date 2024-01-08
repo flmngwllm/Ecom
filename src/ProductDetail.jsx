@@ -22,17 +22,8 @@ function ProductDetail() {
 
   if (!product) <div>Loading...</div>;
 
-  const handleQuantityChange = (newQuantity) => {
-    setQuantity(newQuantity);
-  };
-
   const handleAddToCartWithQuantity = () => {
     handleAddToCart(product, quantity);
-  };
-
-  const handleDecrement = () => {
-    // Update the local quantity state
-    setQuantity(Math.max(quantity - 1, 0));
   };
 
   return (
@@ -45,10 +36,10 @@ function ProductDetail() {
       <UpdateItemQuantities
         productId={product.id}
         quantity={quantity}
-        onQuantityChange={handleQuantityChange}
-        onDecrement={handleDecrement}
+        onIncrement={() => setQuantity(quantity + 1)}
+        onDecrement={() => setQuantity(Math.max(quantity - 1, 0))}
       />
-      <button onClick={handleAddToCartWithQuantity}>Add to Cart</button>{" "}
+      <button onClick={handleAddToCartWithQuantity}>Add to Cart</button>
     </div>
   );
 }
