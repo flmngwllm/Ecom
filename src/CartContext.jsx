@@ -8,7 +8,6 @@ function CartProvider({ children }) {
 
   useEffect(() => {
     const cartItemsData = JSON.parse(localStorage.getItem("cart"));
-
     if (cartItemsData) {
       setCart(cartItemsData);
     }
